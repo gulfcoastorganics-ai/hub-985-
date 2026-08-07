@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SHOP, formattedAddress } from "@/lib/shop";
+import { SHOP, formattedAddress, phoneHref } from "@/lib/shop";
 import { CartProvider } from "@/components/CartProvider";
 import { CartButton } from "@/components/CartButton";
 import "./globals.css";
@@ -8,6 +8,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: `${SHOP.name} — ${SHOP.tagline}`,
   description: SHOP.tagline,
+  // Belt and braces alongside robots.ts, until launch.
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
@@ -38,9 +40,7 @@ export default function RootLayout({
           <footer className="siteFooter">
             <div className="page">
               <strong>{SHOP.name}</strong> · {formattedAddress()} ·{" "}
-              <a href={`tel:${SHOP.phone.replace(/[^\d]/g, "")}`}>
-                {SHOP.phone}
-              </a>
+              <a href={phoneHref()}>{SHOP.phone}</a>
               <div style={{ marginTop: 8 }}>
                 <Link href="/admin">Staff login</Link>
               </div>

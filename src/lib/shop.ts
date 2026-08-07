@@ -1,33 +1,36 @@
 /**
- * Storefront details.
+ * Storefront details. Single source of truth for every public page.
  *
- * PLACEHOLDERS - these were not available in the database or the brief.
- * Edit this file with the real hours, address, and contact info before launch;
- * every public page reads from here so there is exactly one place to change.
+ * There is no public email address for this location, so the Info section
+ * deliberately has no email field - phone is the contact channel.
  */
 
 export const SHOP = {
-  name: "Hub 985",
+  name: "Hub 985 Nutrition",
   tagline: "Loaded teas, protein shakes, and coffee made fresh to order.",
-  phone: "(985) 555-0198",
-  email: "hello@hub985.com",
+  phone: "(985) 246-4225",
   address: {
-    line1: "123 Main Street",
-    city: "Houma",
+    line1: "100 N Tyler St",
+    city: "Covington",
     state: "LA",
-    zip: "70360",
+    zip: "70433",
   },
-  /** 0 = Sunday, matching Date#getDay(). */
+  /** Listed Sunday-first to match Date#getDay() ordering. */
   hours: [
-    { day: "Sunday", open: "Closed", close: null },
-    { day: "Monday", open: "6:30 AM", close: "6:00 PM" },
-    { day: "Tuesday", open: "6:30 AM", close: "6:00 PM" },
-    { day: "Wednesday", open: "6:30 AM", close: "6:00 PM" },
-    { day: "Thursday", open: "6:30 AM", close: "6:00 PM" },
-    { day: "Friday", open: "6:30 AM", close: "7:00 PM" },
-    { day: "Saturday", open: "8:00 AM", close: "4:00 PM" },
+    { day: "Sunday", open: "10:00 AM", close: "2:00 PM" },
+    { day: "Monday", open: "6:00 AM", close: "5:30 PM" },
+    { day: "Tuesday", open: "6:00 AM", close: "5:30 PM" },
+    { day: "Wednesday", open: "6:00 AM", close: "5:30 PM" },
+    { day: "Thursday", open: "6:00 AM", close: "5:30 PM" },
+    { day: "Friday", open: "6:00 AM", close: "5:30 PM" },
+    { day: "Saturday", open: "8:00 AM", close: "3:00 PM" },
   ],
 } as const;
+
+/** Digits only, for tel: links. */
+export function phoneHref(): string {
+  return `tel:${SHOP.phone.replace(/[^\d]/g, "")}`;
+}
 
 export function formattedAddress(): string {
   const { line1, city, state, zip } = SHOP.address;

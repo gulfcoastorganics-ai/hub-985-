@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { SHOP, formattedAddress, mapEmbedUrl, mapLinkUrl } from "@/lib/shop";
+import {
+  SHOP,
+  formattedAddress,
+  mapEmbedUrl,
+  mapLinkUrl,
+  phoneHref,
+} from "@/lib/shop";
 
 export default function HomePage() {
   return (
@@ -46,7 +52,7 @@ export default function HomePage() {
             >
               <span style={{ fontWeight: 600 }}>{entry.day}</span>
               <span className="muted">
-                {entry.close ? `${entry.open} – ${entry.close}` : entry.open}
+                {entry.open} – {entry.close}
               </span>
             </div>
           ))}
@@ -84,14 +90,7 @@ export default function HomePage() {
             <p style={{ margin: "0 0 10px" }}>
               <strong>Phone</strong>
               <br />
-              <a href={`tel:${SHOP.phone.replace(/[^\d]/g, "")}`}>
-                {SHOP.phone}
-              </a>
-            </p>
-            <p style={{ margin: "0 0 10px" }}>
-              <strong>Email</strong>
-              <br />
-              <a href={`mailto:${SHOP.email}`}>{SHOP.email}</a>
+              <a href={phoneHref()}>{SHOP.phone}</a>
             </p>
             <p style={{ margin: "0 0 18px" }}>
               <strong>Address</strong>

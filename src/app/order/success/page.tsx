@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getOrderBySessionId } from "@/lib/db";
 import { formatPrice } from "@/lib/money";
-import { SHOP } from "@/lib/shop";
+import { SHOP, phoneHref } from "@/lib/shop";
 import { ClearCartOnMount } from "@/components/ClearCartOnMount";
 
 export const dynamic = "force-dynamic";
@@ -111,7 +111,7 @@ export default async function OrderSuccessPage({
           <p className="muted" style={{ fontSize: 13, marginTop: 14 }}>
             Order reference <code>{order.id.slice(0, 8)}</code> · questions?
             Call{" "}
-            <a href={`tel:${SHOP.phone.replace(/[^\d]/g, "")}`}>{SHOP.phone}</a>
+            <a href={phoneHref()}>{SHOP.phone}</a>
           </p>
         </div>
       )}
