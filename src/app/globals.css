@@ -1,37 +1,48 @@
 /*
  * Design tokens.
  *
- * Values below are pulled directly from the Claude Design prototype
- * ("Hub985 App.dc.html", provided as a file upload after claude.ai/design's
- * own URL returned 403 to both WebFetch and the DesignSync tool). Every
- * color, font, radius and spacing value in the app resolves through a
- * variable defined here - components read tokens and never hardcode values,
- * so retuning the look later is an edit to this block, not to components.
+ * Dark theme, using exact hex values sampled directly from the real Claude
+ * Design screenshot (superseding an earlier, incorrect light-theme reading
+ * pulled from the prototype's raw HTML). Every color, font, radius and
+ * spacing value in the app resolves through a variable defined here -
+ * components read tokens and never hardcode values, so retuning the look
+ * later is an edit to this block, not to components.
+ *
+ * Only seven source hex values exist. Everything else here (surfaces,
+ * borders, hover states) is a color-mix() of those seven plus black/white -
+ * never a new hue invented outside the sampled palette.
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&display=swap");
 
 :root {
-  /* brand - teal is the prototype's primary action color (buttons, links) */
-  --brand: #32c7d4;
-  --brand-strong: #0e7a82;
-  --brand-soft: #e4f6f4;
-  /* magenta is the prototype's secondary/CTA-emphasis color (add-to-cart,
-     badges); lime is its rare high-contrast highlight (selection, previews) */
-  --accent: #f04a91;
-  --accent-soft: #fce4ee;
-  --highlight: #d9e72e;
+  /* HUB985 logo trio - cyan is primary action (buttons, links); magenta is
+     secondary/CTA emphasis; yellow is reserved for the logo's third color */
+  --brand: #3dd5ea;
+  --brand-strong: color-mix(in srgb, #3dd5ea 72%, black);
+  --brand-soft: color-mix(in srgb, #3dd5ea 16%, #101114);
+  --accent: #ff00aa;
+  --accent-soft: color-mix(in srgb, #ff00aa 16%, #101114);
+  --logo-yellow: #f0e900;
+  /* neon yellow-green - badges, stars, "Today's Special"-style callouts */
+  --highlight: #d9e62e;
+  --highlight-soft: color-mix(in srgb, #d9e62e 16%, #101114);
 
-  /* surfaces - warm cream, not white, matching the prototype's body bg */
-  --bg: #f7f6f2;
-  --surface: #ffffff;
-  --surface-alt: #edebe4;
-  --border: #dedbd0;
+  /* surfaces - near-black ground; panels lifted off it with white, never a
+     separately invented gray */
+  --bg: #101114;
+  --surface: color-mix(in srgb, #fefefe 6%, #101114);
+  --surface-alt: color-mix(in srgb, #fefefe 3%, #101114);
+  --border: color-mix(in srgb, #fefefe 14%, transparent);
 
   /* text */
-  --text: #101114;
-  --text-muted: #686a70;
-  --text-inverse: #ffffff;
+  --text: #fefefe;
+  --text-muted: #b9bac0;
+  /* Dark ink, not white: every brand/accent/highlight swatch above is a
+     bright neon, so buttons on those backgrounds read correctly with dark
+     text (verified - white-on-magenta is ~3.6:1, dark-on-magenta ~5.8:1;
+     dark-on-cyan ~11.9:1 vs white-on-cyan ~1.8:1). */
+  --text-inverse: #101114;
 
   /* status - left as clear traffic-light semantics rather than brand tints,
      since these need to stay distinguishable at a glance in the kitchen */
@@ -113,7 +124,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(251, 250, 247, 0.85);
+  background: color-mix(in srgb, #101114 85%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -134,7 +145,17 @@ h3 {
 }
 
 .logo span {
-  color: var(--brand);
+  /* the three HUB985 logo colors, as a text gradient rather than a single
+     flat swatch */
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--logo-yellow),
+    var(--brand)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .nav {
