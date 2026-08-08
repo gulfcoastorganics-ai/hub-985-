@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   SHOP,
@@ -10,24 +11,48 @@ import {
 export default function HomePage() {
   return (
     <>
-      <section className="page" style={{ padding: "72px 20px 56px" }}>
-        <h1 style={{ fontSize: 52, maxWidth: 620 }}>
-          Fresh energy, <span style={{ color: "var(--brand)" }}>made daily</span>
-          .
-        </h1>
-        <p
-          className="muted"
-          style={{ fontSize: 19, maxWidth: 540, marginTop: 16 }}
+      <section
+        className="page"
+        style={{
+          padding: "56px 20px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gap: 40,
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <h1 style={{ fontSize: 52, maxWidth: 620 }}>
+            Fresh energy,{" "}
+            <span style={{ color: "var(--brand)" }}>made daily</span>.
+          </h1>
+          <p
+            className="muted"
+            style={{ fontSize: 19, maxWidth: 540, marginTop: 16 }}
+          >
+            {SHOP.tagline} Order ahead and skip the line.
+          </p>
+          <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
+            <Link href="/menu" className="btn btnPrimary">
+              Order now
+            </Link>
+            <a href="#visit" className="btn btnSecondary">
+              Find us
+            </a>
+          </div>
+        </div>
+        <div
+          className="card"
+          style={{ overflow: "hidden", padding: 0, maxHeight: 420 }}
         >
-          {SHOP.tagline} Order ahead and skip the line.
-        </p>
-        <div style={{ display: "flex", gap: 12, marginTop: 28 }}>
-          <Link href="/menu" className="btn btnPrimary">
-            Order now
-          </Link>
-          <a href="#visit" className="btn btnSecondary">
-            Find us
-          </a>
+          <Image
+            src="/images/drink-lineup.jpg"
+            alt="A lineup of colorful Hub 985 loaded teas and shakes"
+            width={2000}
+            height={1945}
+            priority
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </div>
       </section>
 
@@ -71,6 +96,17 @@ export default function HomePage() {
             gap: "var(--gap)",
           }}
         >
+          <div
+            className="card"
+            style={{ overflow: "hidden", minHeight: 300, padding: 0, position: "relative" }}
+          >
+            <Image
+              src="/images/storefront.jpg"
+              alt="The Hub 985 Nutrition storefront in Covington, LA"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div
             className="card"
             style={{ overflow: "hidden", minHeight: 300, padding: 0 }}
