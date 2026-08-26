@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Software Assets for Acquisition | FULCRUMHAUS",
   description:
     "Direct acquisition opportunities for four working software assets: TraceLens, VestraGlobe, PRISMATIC, and Vestra Intel.",
+  robots: { index: true, follow: true },
 };
 
 type Asset = {
